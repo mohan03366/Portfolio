@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-zinc-900 text-zinc-50;
+}
+
+/* components css */
+
+.menu-btn {
+  @apply w-12 h-12 grid place-items-center text-white rounded-xl bg-gradient-to-r from-purple-600 to-indigo-500;
+  @apply ring-2 ring-purple-300/50 shadow-xl;
+  @apply transition-all duration-300 ease-in-out relative isolate;
+
+  /* Frosted Glass Effect */
+  backdrop-filter: blur(20px) saturate(150%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  /* Glow Effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(255, 255, 255, 0.2),
+    0 0 15px rgba(128, 90, 213, 0.6);
+
+  /* Hover Effects */
+  @apply hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500;
+  filter: drop-shadow(0 4px 6px rgba(255, 255, 255, 0.4));
+
+  /* Ripple Animation Effect */
+  overflow: hidden;
+}
+
+.menu-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15),
+    0 4px 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(236, 72, 153, 0.8);
+}
+
+.menu-btn:active {
+  transform: translateY(1px) scale(0.95);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.menu-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+}
+
+.menu-btn:hover::before {
+  width: 200%;
+  height: 200%;
+  opacity: 1;
+}
+
+.menu-btn:focus {
+  @apply outline-none;
+  box-shadow: 0 0 10px 4px rgba(128, 90, 213, 0.8);
+}
+
+/* Text and Icon Animations */
+.menu-btn span {
+  transition: transform 0.3s ease;
+}
+
+.menu-btn:hover span {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.navbar {
+  @apply absolute top-full mt-2 right-0 min-w-40 p-4 bg-zinc-50/20 rounded-2xl ring-inset ring-1 ring-zinc-50/10 scale-90 isolate blur-sm opacity-0 invisible transition-all duration-500 ease-out transform shadow-lg md:static md:flex md:items-center md:mt-0 md:opacity-100 md:blur-0 md:visible md:scale-100 backdrop-blur-3xl;
+
+  /* Frosted Glass Effect */
+  background: rgba(0, 0, 0, 0.1); /* Slight transparent dark background */
+  backdrop-filter: blur(15px) saturate(150%); /* More intense blur and color saturation */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+
+  /* Gradient Overlay for a premium feel */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(0, 0, 0, 0.05)
+  );
+}
+
+/* Hover Effects */
+.navbar:hover {
+  transform: translateY(-5px) scale(1.03); /* Slight lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1); /* Deeper shadow on hover */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    @apply p-4 bg-zinc-50/15;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Softer shadow on mobile */
+  }
+
+  /* More distinct hover on small screens */
+  .navbar:hover {
+    transform: translateY(-4px) scale(1.05); /* Larger hover scale */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* Smooth Transition for Visibility & Scale */
+@keyframes navbar-slide {
+  0% {
+    transform: translateY(50px) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.navbar {
+  animation: navbar-slide 0.5s ease-in-out forwards; /* Slide-in animation for premium feel */
+}
+
+.navbar.active {
+  @apply opacity-100 scale-100 blur-0 visible;
+}
+.nav-link {
+  @apply grid items-center px-4 h-9 text-sm font-medium tracking-wide text-zinc-50/50 hover:text-zinc-50  transition-colors;
+}
+
+.nav-link.active {
+  @apply text-zinc-900 duration-500;
+}
+.navbar .active-box {
+  @apply absolute top-2 left-2 right-2 h-9 bg-zinc-50 rounded-lg -z-10;
+}
+
+.btn {
+  position: relative; /* Required for ripple */
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(10px); /* Glass morphism */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  overflow: hidden; /* For ripple animation */
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.1); /* Subtle hover lift */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+  filter: brightness(1.1);
+}
+
+.btn:active {
+  transform: translateY(2px) scale(0.95); /* Realistic press down */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.5);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn::after {
+  /* Ripple effect */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.4s ease;
+  z-index: 0;
+}
+
+.btn:active::after {
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+}
+
+.container {
+  @apply px-4 mx-auto lg:px-8  xl:max-w-6xl;
+}
+
+.img-box {
+  @apply bg-zinc-700 overflow-hidden;
+}
+.img-cover {
+  @apply w-full h-full object-cover;
+}
+
+.section {
+  @apply pt-10 lg:pt-32;
+}
