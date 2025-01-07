@@ -36,7 +36,7 @@ const Work = () => {
       imgSrc: "/images/project4.jpg.png",
       title: "vCard Personal portfolio",
       tags: ["Web-design", "Development"],
-      projectLink: "https://github.com/codewithsadee/vcard-personal-portfolio",
+      projectLink: "https://github.com/mohan03366/Portfolio",
     },
   ];
 
